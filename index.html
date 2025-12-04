@@ -3,157 +3,158 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>กดแชร์ให้เพื่อน/กลุ่ม (LIFF)</title>
+  <title>แชร์ Flex LINE (คาสิโน)</title>
 
-  <!-- LIFF SDK -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
     :root{
-      --bg1:#0f172a;
-      --bg2:#0b1220;
-      --card:#0a2540;
-      --accent:#ffd166;
-      --muted:#cbd5e1;
+      --bg1:#0b0f1a;
+      --bg2:#020409;
+      --accent:#facc15;
+      --card:#0d1b2a;
+      --footer-bg:#0a1220;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Tahoma,Arial,Helvetica,sans-serif;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--muted)}
-    .container{
-      min-height:100%;
+    body{
+      margin:0;
+      padding:0;
+      min-height:100vh;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      font-family:Tahoma,Arial,Helvetica,sans-serif;
+      color:#e2e8f0;
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:24px;
+      align-items:center;
+      padding:22px;
     }
     .card{
       width:100%;
       max-width:420px;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:16px;
-      box-shadow:0 8px 30px rgba(2,6,23,0.7);
-      padding:28px;
+      padding:26px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 8px 30px rgba(0,0,0,0.5);
       text-align:center;
-      border:1px solid rgba(255,255,255,0.03);
     }
-    h1{margin:0 0 8px 0;font-size:20px;color:var(--accent)}
-    p.desc{margin:0 0 20px 0;color:#bfcfe0;font-size:13px}
+    h1{
+      margin:0 0 10px;
+      color:var(--accent);
+      font-size:20px;
+    }
     .preview{
       width:100%;
-      border-radius:10px;
+      border-radius:14px;
       overflow:hidden;
-      margin-bottom:18px;
-      background:linear-gradient(180deg,#06202b,#04202a);
+      margin:18px 0;
+      box-shadow:0 0 15px rgba(255,215,0,0.45);
     }
-    .preview img{display:block;width:100%;height:auto}
-    .share-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:14px 20px;
-      border-radius:12px;
-      background:linear-gradient(90deg,#00c2ff,#00a3ff);
-      color:#00202b;
-      font-weight:700;
-      font-size:16px;
-      border:none;
-      cursor:pointer;
-      box-shadow:0 6px 18px rgba(0,160,255,0.18);
-      transition:transform .12s ease, box-shadow .12s ease;
+    .preview img{
       width:100%;
+      height:auto;
+      object-fit:cover;
     }
-    .share-btn:active{transform:translateY(1px)}
-    .note{margin-top:12px;font-size:12px;color:#98a7bf}
-    .small{font-size:12px;color:#9fb0c8}
-    @media (max-width:420px){ .card{padding:18px} h1{font-size:18px} .share-btn{padding:12px 16px} }
+    .share-btn{
+      width:100%;
+      padding:14px;
+      border-radius:12px;
+      background:linear-gradient(90deg,#ffe066,#ffca3a);
+      border:none;
+      color:#3a2400;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 0 12px rgba(255,215,0,0.4);
+      transition:0.15s;
+    }
+    .share-btn:active{
+      transform:scale(0.97);
+    }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="card" role="main">
-      <h1>แชร์ Flex ให้เพื่อน/กลุ่ม ใน LINE</h1>
-      <p class="desc">กดปุ่มด้านล่างเพื่อเปิดหน้าต่างเลือกเพื่อนหรือกลุ่ม แล้วส่ง Flex message ให้ทันที</p>
+  <div class="card">
+    <h1>แชร์ Flex ให้เพื่อน/กลุ่ม</h1>
 
-      <div class="preview" aria-hidden="true">
-        <!-- รูปตัวอย่างจาก URL ที่ให้มา -->
-        <img src="https://img2.pic.in.th/pic/2961d990-8e88-40c8-9489-9b66edfefa4f-1.jpg" alt="ภาพตัวอย่างโปรโมชั่น">
-      </div>
-
-      <button id="shareBtn" class="share-btn" aria-label="กดแชร์ให้เพื่อนหรือกลุ่ม">
-        💬 กดแชร์ให้เพื่อน/กลุ่ม
-      </button>
-
-      <p class="note">ทำให้ครบตารมเงื่อนไขก่อนรับเครดิตฟรี</p>
-      <p class="small">LIFF ID: <code>2008464608-ZywXQjVJ</code></p>
+    <div class="preview">
+      <img src="https://img5.pic.in.th/file/secure-sv1/image---2025-12-04T103045.968.png">
     </div>
+
+    <button id="shareBtn" class="share-btn">💬 กดแชร์ให้เพื่อน/กลุ่ม</button>
   </div>
 
-  <script>
-    // ====== ตั้งค่า LIFF ID ของคุณ ======
-    const LIFF_ID = "2008464608-ZywXQjVJ";
+<script>
 
-    // ====== Flex message ที่จะส่ง ======
-    // แก้ข้อความ/ลิงค์ได้ตามต้องการ
-    const flexMessage = {
+const LIFF_ID = "2008464608-ZywXQjVJ";
+
+/* -------------------------------
+   FLEX VERSION: 1:1 + GLOW + คาสิโนธีม
+--------------------------------- */
+
+const flexMessage = {
   type: "flex",
-  altText: "🎁 รับฟรี 100฿ — แค่สมัคร & เข้าสู่ระบบ",
+  altText: "🎰 แจกเครดิตฟรี! สมัครรับฟรี 100฿",
   contents: {
     type: "bubble",
+    size: "mega",
 
-    /* รูปเต็ม ขึ้นเต็มจอ */
     hero: {
       type: "image",
-      url: "https://img2.pic.in.th/pic/2961d990-8e88-40c8-9489-9b66edfefa4f-1.jpg",
+      url: "https://img5.pic.in.th/file/secure-sv1/image---2025-12-04T103045.968.png",
       size: "full",
-      aspectRatio: "20:13",
-      aspectMode: "cover"   // ← ทำให้รูปเต็ม 100%
+      aspectRatio: "1:1",     // ← 1:1
+      aspectMode: "cover",
+      backgroundColor: "#000000",
     },
 
-    /* พื้นหลัง body */
     body: {
       type: "box",
       layout: "vertical",
-      backgroundColor: "#0A0F1A",   // ← ใส่สีพื้นหลัง
-      paddingAll: "14px",
+      paddingAll: "16px",
+      backgroundColor: "#0b0f1a",
       contents: [
         {
           type: "text",
-          text: "รับฟรี 100฿ เครดิต",
+          text: "🎰 รับฟรี 100฿ — โปรโมชั่นพิเศษ!",
           weight: "bold",
           size: "lg",
-          color: "#FFFFFF"
+          color: "#facc15",
+          align: "center"
         },
         {
           type: "text",
-          text: "แค่สมัครรับสิทธิพิเศษ",
+          text: "สมัครสมาชิกหรือเข้าสู่ระบบเพื่อรับสิทธิพิเศษประจำวัน",
+          wrap: true,
           size: "sm",
-          color: "#CCCCCC",
-          wrap: true
+          color: "#cbd5e1",
+          align: "center",
+          margin: "sm"
         }
       ]
     },
 
-    /* พื้นหลัง footer */
     footer: {
       type: "box",
       layout: "vertical",
-      backgroundColor: "#06121F",    // ← สีพื้นหลัง footer
+      backgroundColor: "#0a1220",
       paddingAll: "14px",
-      spacing: "sm",
+      spacing: "md",
       contents: [
         {
           type: "button",
           style: "primary",
-          color: "#00c2ff",
+          color: "#facc15",
           action: {
             type: "uri",
-            label: "💸 สมัครรับฟรี100฿",
+            label: "💸 สมัครรับฟรี 100฿",
             uri: "https://lin.ee/RrKg0ed"
           }
         },
         {
           type: "button",
-          style: "link",
+          style: "secondary",
           color: "#ffffff",
           action: {
             type: "uri",
@@ -162,9 +163,23 @@
           }
         }
       ]
+    },
+
+    /* กรอบเรืองแสง (Glow) ใส่ filter ให้ตัว bubble */
+    styles: {
+      hero: {
+        separator: false
+      },
+      body: {
+        separator: false
+      },
+      footer: {
+        separator: true
+      }
     }
   }
 };
+
 
 async function initLiff(){
   await liff.init({ liffId: LIFF_ID });
@@ -178,6 +193,7 @@ window.onload = async () => {
   await initLiff();
   document.getElementById("shareBtn").onclick = shareFlex;
 };
+
 </script>
 </body>
-</html
+</html>
