@@ -1,3 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แชร์เพื่อรับสิทธิ์</title>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at center, #2a2a2a, #000);
+        font-family: "Prompt", sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    .wrap {
+        margin-top: 55px;
+    }
+
+    .share-btn {
+        margin-top: 35px;
+        padding: 20px 40px;
+        font-size: 26px;
+        font-weight: 700;
+        border: none;
+        border-radius: 18px;
+        color: #000;
+        background: linear-gradient(180deg, #ffe26b, #ffc400);
+        box-shadow: 0 10px 0 #b88400, 0 0 30px #ffea74, 0 0 60px rgba(255,210,0,0.6);
+        cursor: pointer;
+        transition: 0.15s;
+    }
+
+    .share-btn:active {
+        transform: translateY(10px);
+        box-shadow: 0 0px 0 #b88400, 0 0 20px #ffea74;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+    <h2 style="text-shadow: 0 0 15px #fff;">💸 แชร์เพื่อรับสิทธิ์พิเศษ 💸</h2>
+    <p style="opacity: 0.9;">กดแชร์แล้วรับทันที!</p>
+
+    <button class="share-btn" onclick="shareFlex()">กดแชร์ให้เพื่อน/กลุ่ม</button>
+</div>
+
+<script>
+const LIFF_ID = "2008464608-ZywXQjVJ";
+
 async function shareFlex() {
     await liff.init({ liffId: LIFF_ID });
     await liff.ready;
