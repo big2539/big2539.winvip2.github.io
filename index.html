@@ -95,42 +95,45 @@
     // ====== Flex message ที่จะส่ง ======
     // แก้ข้อความ/ลิงค์ได้ตามต้องการ
     const flexMessage = {
-      type: "flex",
-      altText: "🎁 รับฟรี 100฿ — แค่สมัคร & เข้าสู่ระบบ",
-      contents: {
-        type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://img2.pic.in.th/pic/2961d990-8e88-40c8-9489-9b66edfefa4f-1.jpg",
-          size: "full",
-          aspectRatio: "1:1",
-          aspectMode: "cover"
-        },
-/* พื้นหลัง body */
+  type: "flex",
+  altText: "🎁 รับฟรี 100฿ — แค่สมัคร & เข้าสู่ระบบ",
+  contents: {
+    type: "bubble",
+
+    /* รูปเต็ม ขึ้นเต็มจอ */
+    hero: {
+      type: "image",
+      url: "https://img2.pic.in.th/pic/2961d990-8e88-40c8-9489-9b66edfefa4f-1.jpg",
+      size: "full",
+      aspectRatio: "20:13",
+      aspectMode: "cover"   // ← ทำให้รูปเต็ม 100%
+    },
+
+    /* พื้นหลัง body */
     body: {
       type: "box",
       layout: "vertical",
       backgroundColor: "#0A0F1A",   // ← ใส่สีพื้นหลัง
       paddingAll: "14px",
       contents: [
-            {
-              type: "text",
-              text: "รับฟรี 100฿ เครดิตง่ายๆ",
-              weight: "bold",
-              size: "lg",
-              margin: "xs"
-            },
-            {
-              type: "text",
-              text: "แค่สมัครเป็นสมาชิกรับสิทธิพิเศษ",
-              size: "sm",
-              color: "#666666",
-              wrap: true,
-              margin: "md"
-            }
-          ]
+        {
+          type: "text",
+          text: "รับฟรี 100฿ เครดิต",
+          weight: "bold",
+          size: "lg",
+          color: "#FFFFFF"
         },
-        /* พื้นหลัง footer */
+        {
+          type: "text",
+          text: "แค่สมัครรับสิทธิพิเศษ",
+          size: "sm",
+          color: "#CCCCCC",
+          wrap: true
+        }
+      ]
+    },
+
+    /* พื้นหลัง footer */
     footer: {
       type: "box",
       layout: "vertical",
@@ -138,79 +141,43 @@
       paddingAll: "14px",
       spacing: "sm",
       contents: [
-            {
-              type: "button",
-              style: "primary",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "💸 สมัครรับฟรี100฿",
-                uri: "https://lin.ee/RrKg0ed"
-              }
-            },
-            {
-              type: "button",
-              style: "secondary",
-              height: "sm",
-              action: {
-                type: "uri",
-                label: "🔐 เข้าสู่ระบบ winnerslot88.com",
-                uri: "https://winnerslot88.com"
-              }
-            }
-          ],
-          margin: "md"
+        {
+          type: "button",
+          style: "primary",
+          color: "#00c2ff",
+          action: {
+            type: "uri",
+            label: "💸 สมัครรับฟรี100฿",
+            uri: "https://lin.ee/RrKg0ed"
+          }
+        },
+        {
+          type: "button",
+          style: "link",
+          color: "#ffffff",
+          action: {
+            type: "uri",
+            label: "🔐 เข้าสู่ระบบ winnerslot88.com",
+            uri: "https://winnerslot88.com"
+          }
         }
-      }
-    };
-
-    // ====== ฟังก์ชันเริ่มต้น LIFF ======
-    async function initLiff() {
-      try {
-        await liff.init({ liffId: LIFF_ID });
-        // ถ้าต้องการเช็คว่าเปิดจากในแอป LINE หรือไม่:
-        // const isInClient = liff.isInClient();
-        // console.log("isInClient:", isInClient);
-      } catch (err) {
-        console.error("LIFF init error:", err);
-        // ถ้าไม่ใช่ในแอป LINE ให้แสดงข้อความแจ้งผู้ใช้
-        alert("ไม่สามารถเริ่ม LIFF ได้ — โปรดเปิดหน้านี้จากในแอป LINE");
-      }
+      ]
     }
+  }
+};
 
-    // ====== ฟังก์ชันเรียก Share Target Picker ======
-    async function openSharePicker() {
-      try {
-        // shareTargetPicker จะรับ array ของ message objects
-        // ตรวจสอบว่า liff.shareTargetPicker พร้อมใช้งานก่อน
-        if (!liff.shareTargetPicker) {
-          alert("ฟีเจอร์แชร์ไม่รองรับในเวอร์ชัน LIFF นี้");
-          return;
-        }
+async function initLiff(){
+  await liff.init({ liffId: LIFF_ID });
+}
 
-        const messages = [flexMessage];
+async function shareFlex(){
+  await liff.shareTargetPicker([flexMessage]);
+}
 
-        // เปิดหน้าต่างเลือกเพื่อน/กลุ่ม ในแอป LINE
-        const result = await liff.shareTargetPicker(messages);
-
-        // result จะเป็น undefined หรือมีค่าเมื่อสำเร็จ ขึ้นกับเวอร์ชัน API
-        console.log("shareTargetPicker result:", result);
-      } catch (err) {
-        console.error("แชร์ไม่สำเร็จ:", err);
-        alert("เกิดข้อผิดพลาดขณะพยายามแชร์");
-      }
-    }
-
-    // เรียก init เมื่อโหลดเสร็จ
-    window.addEventListener("load", async () => {
-      await initLiff();
-
-      const btn = document.getElementById("shareBtn");
-      btn.addEventListener("click", async (e) => {
-        // ถ้าต้องการ ให้เปลี่ยนเป็นตรวจสอบ liff.isLoggedIn() หรืออื่นๆ
-        await openSharePicker();
-      });
-    });
-  </script>
+window.onload = async () => {
+  await initLiff();
+  document.getElementById("shareBtn").onclick = shareFlex;
+};
+</script>
 </body>
-</html>
+</html
