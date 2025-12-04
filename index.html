@@ -103,14 +103,16 @@
           type: "image",
           url: "https://img2.pic.in.th/pic/2961d990-8e88-40c8-9489-9b66edfefa4f-1.jpg",
           size: "full",
-          aspectRatio: "20:13",
+          aspectRatio: "1:1",
           aspectMode: "cover"
         },
-        body: {
-          type: "box",
-          layout: "vertical",
-          spacing: "sm",
-          contents: [
+/* พื้นหลัง body */
+    body: {
+      type: "box",
+      layout: "vertical",
+      backgroundColor: "#0A0F1A",   // ← ใส่สีพื้นหลัง
+      paddingAll: "14px",
+      contents: [
             {
               type: "text",
               text: "รับฟรี 100฿ เครดิตง่ายๆ",
@@ -128,11 +130,14 @@
             }
           ]
         },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          spacing: "sm",
-          contents: [
+        /* พื้นหลัง footer */
+    footer: {
+      type: "box",
+      layout: "vertical",
+      backgroundColor: "#06121F",    // ← สีพื้นหลัง footer
+      paddingAll: "14px",
+      spacing: "sm",
+      contents: [
             {
               type: "button",
               style: "primary",
